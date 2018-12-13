@@ -1,0 +1,17 @@
+{
+  "parser": "babel-eslint",
+  "extends": "airbnb",
+  "env": {
+    "browser": true
+  },
+  "globals": {
+    "forge": true
+  },
+  "rules": {
+    "func-names": 0,
+    "max-len": 0,
+    "no-else-return": 0,
+    "no-underscore-dangle": 0,
+    "prefer-template": 0
+  }
+}
