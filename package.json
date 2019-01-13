@@ -1,10 +1,11 @@
 {
   "name": "head-http",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "$http",
   "main": "dist/http.js",
   "scripts": {
-    "build": "rollup --config rollupfile.js ./src/index.js"
+    "build": "rollup --config rollupfile.js ./src/index.js",
+    "build-localStorage": "rollup --config rollupfile-localStorage.js ./src/index-localStorage.js"
   },
   "repository": {
     "type": "git",

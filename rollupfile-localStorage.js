@@ -5,7 +5,7 @@ import babel from 'rollup-plugin-babel';
 
 
 export default {
-  entry: 'src/index-localStorage.js',
+  entry: 'src/index.js',
 
   external: [
     'axios',
