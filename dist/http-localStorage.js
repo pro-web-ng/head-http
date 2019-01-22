@@ -76,19 +76,21 @@ $http$1.delete = function (endpoint) {
   return $http$1._delete(endpoint, { params: query });
 };
 
-(function webTokenByLocalStorage() {
-  if (localStorage && localStorage.getItem && localStorage.setItem) {
+(function webTokenByInput() {
+  if (document && document.querySelector) {
     (function () {
-      var value = localStorage.getItem('#_webtoken');
-      if (value) {
-        $http$1.defaults.headers.common['Authorization'] = 'Bearer ' + value; // eslint-disable-line dot-notation
+      var storage = document.querySelector('#_webtoken');
+      if (storage) {
+        if (storage.value) {
+          $http$1.defaults.headers.common['Authorization'] = 'Bearer ' + storage.value; // eslint-disable-line dot-notation
+        }
 
         $http$1.interceptors.response.use(function (resp) {
           // eslint-disable-line prefer-arrow-callback
           if (resp.headers && resp.headers['x-web-token']) {
             var webtoken = resp.headers['x-web-token'];
             $http$1.defaults.headers.common['Authorization'] = 'Bearer ' + webtoken; // eslint-disable-line dot-notation
-            localStorage.setItem('#_webtoken', webtoken);
+            storage.value = webtoken;
           }
           return resp;
         }, function (error) {
@@ -99,16 +101,18 @@ $http$1.delete = function (endpoint) {
     })();
 
     (function () {
-      var value = localStorage.getItem('#_webtracking');
-      if (value) {
-        $http$1.defaults.headers.common['X-Tk'] = value;
+      var storage = document.querySelector('#_webtracking');
+      if (storage) {
+        if (storage.value) {
+          $http$1.defaults.headers.common['X-Tk'] = storage.value;
+        }
 
         $http$1.interceptors.response.use(function (resp) {
           // eslint-disable-line prefer-arrow-callback
           if (resp.headers && resp.headers['x-web-tracking']) {
             var webtracking = resp.headers['x-web-tracking'];
             $http$1.defaults.headers.common['X-Tk'] = webtracking;
-            localStorage.setItem('#_webtracking', webtracking);
+            storage.value = webtracking;
           }
           return resp;
         }, function (error) {
@@ -116,6 +120,50 @@ $http$1.delete = function (endpoint) {
           return Promise.reject(error);
         });
       }
+    })();
+  }
+})();
+
+(function webTokenByLocalStorage() {
+  if (localStorage && localStorage.getItem && localStorage.setItem) {
+    (function () {
+      var value = localStorage.getItem('#_webtoken');
+      if (value) {
+        $http$1.defaults.headers.common['Authorization'] = 'Bearer ' + value; // eslint-disable-line dot-notation
+      }
+
+      $http$1.interceptors.response.use(function (resp) {
+        // eslint-disable-line prefer-arrow-callback
+        if (resp.headers && resp.headers['x-web-token']) {
+          var webtoken = resp.headers['x-web-token'];
+          $http$1.defaults.headers.common['Authorization'] = 'Bearer ' + webtoken; // eslint-disable-line dot-notation
+          localStorage.setItem('#_webtoken', webtoken);
+        }
+        return resp;
+      }, function (error) {
+        // eslint-disable-line prefer-arrow-callback
+        return Promise.reject(error);
+      });
+    })();
+
+    (function () {
+      var value = localStorage.getItem('#_webtracking');
+      if (value) {
+        $http$1.defaults.headers.common['X-Tk'] = value;
+      }
+
+      $http$1.interceptors.response.use(function (resp) {
+        // eslint-disable-line prefer-arrow-callback
+        if (resp.headers && resp.headers['x-web-tracking']) {
+          var webtracking = resp.headers['x-web-tracking'];
+          $http$1.defaults.headers.common['X-Tk'] = webtracking;
+          localStorage.setItem('#_webtracking', webtracking);
+        }
+        return resp;
+      }, function (error) {
+        // eslint-disable-line prefer-arrow-callback
+        return Promise.reject(error);
+      });
     })();
   }
 })();
