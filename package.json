@@ -4,8 +4,7 @@
   "description": "$http",
   "main": "dist/http.js",
   "scripts": {
-    "build": "rollup --config rollupfile.js ./src/index.js",
-    "build-localStorage": "rollup --config rollupfile-localStorage.js ./src/index-localStorage.js"
+    "build": "rollup --config rollupfile.js"
   },
   "repository": {
     "type": "git",
