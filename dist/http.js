@@ -76,6 +76,41 @@ $http$1.delete = function (endpoint) {
   return $http$1._delete(endpoint, { params: query });
 };
 
+// more sugar
+function once($, options) {
+  return {
+    post: function post(endpoint, command) {
+      return $.post(endpoint, command, options);
+    }
+  };
+}
+
+$http$1.xpl = function () {
+  var headers = {};
+
+  var payload = null;
+  if (document && document.querySelector) {
+    var input = document.querySelector('#_webpayload');
+    if (input) {
+      var value = input.value;
+      if (value) {
+        payload = value;
+      }
+    }
+  } else if (localStorage && localStorage.getItem && localStorage.setItem) {
+    var item = localStorage.getItem('#_webpayload');
+    if (item) {
+      payload = item;
+    }
+  }
+
+  if (payload) {
+    headers['X-Pl'] = payload;
+  }
+
+  return once($http$1, { headers: headers });
+};
+
 (function webTokenByInput() {
   if (document && document.querySelector) {
     (function () {
