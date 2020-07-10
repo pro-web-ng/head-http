@@ -1,11 +1,11 @@
-import eslint from 'rollup-plugin-eslint';
+import { eslint } from 'rollup-plugin-eslint';
 import commonjs from 'rollup-plugin-commonjs';
 import resolve from 'rollup-plugin-node-resolve';
 import babel from 'rollup-plugin-babel';
 
 
-export default {
-  entry: 'src/index.js',
+export default [{
+  input: 'src/index.js',
 
   external: [
     'axios',
@@ -30,7 +30,7 @@ export default {
     }),
   ],
 
-  targets: [
-    { dest: 'dist/http.js', format: 'cjs', globals: { forge: 'forge' } },
+  output: [
+    { file: 'dist/http.js', format: 'cjs' },
   ],
-};
+}];

@@ -6,5 +6,8 @@ lib/
 src/
 test/
 
+.babelrc
+.eslintrc
 .gitignore
+index.js
 rollupfile.js
