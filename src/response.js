@@ -23,7 +23,7 @@ export function onSuccess(response) {
       }
       return Promise.resolve(data);
     } else {
-      const resp = { code: 0, message: 'ok', status, data };
+      const resp = { code: 0, message: 'ok', status, data }; // eslint-disable-line object-curly-newline
       if (hasHeaders) {
         resp.headers = headers;
       }
@@ -37,9 +37,9 @@ export function onError(error) {
   // console.log('interceptors.error', error);
   const { data, status } = error.response;
   if (typeof data === 'string') {
-    return Promise.reject({ status, data });
+    return Promise.reject({ status, data }); // eslint-disable-line prefer-promise-reject-errors
   } else {
     data.status = status;
-    return Promise.reject(data);
+    return Promise.reject(data); // eslint-disable-line prefer-promise-reject-errors
   }
 }
