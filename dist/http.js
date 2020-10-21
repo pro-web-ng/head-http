@@ -4,6 +4,83 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 
 var axios = _interopDefault(require('axios'));
 
+function _typeof(obj) {
+  "@babel/helpers - typeof";
+
+  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+    _typeof = function (obj) {
+      return typeof obj;
+    };
+  } else {
+    _typeof = function (obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    };
+  }
+
+  return _typeof(obj);
+}
+
+/* eslint-disable */
+
+/* axios@0.19.2 */
+function isArray(val) {
+  return toString.call(val) === '[object Array]';
+}
+
+function forEach(obj, fn) {
+  // Don't bother if no value provided
+  if (obj === null || typeof obj === 'undefined') {
+    return;
+  } // Force an array if not already something iterable
+
+
+  if (_typeof(obj) !== 'object') {
+    /*eslint no-param-reassign:0*/
+    obj = [obj];
+  }
+
+  if (isArray(obj)) {
+    // Iterate over array values
+    for (var i = 0, l = obj.length; i < l; i++) {
+      fn.call(null, obj[i], i, obj);
+    }
+  } else {
+    // Iterate over object keys
+    for (var key in obj) {
+      if (Object.prototype.hasOwnProperty.call(obj, key)) {
+        fn.call(null, obj[key], key, obj);
+      }
+    }
+  }
+}
+
+function merge()
+/* obj1, obj2, obj3, ... */
+{
+  var result = {};
+
+  function assignValue(val, key) {
+    if (_typeof(result[key]) === 'object' && _typeof(val) === 'object') {
+      result[key] = merge(result[key], val);
+    } else {
+      result[key] = val;
+    }
+  }
+
+  for (var i = 0, l = arguments.length; i < l; i++) {
+    forEach(arguments[i], assignValue);
+  }
+
+  return result;
+}
+
+var utils = {
+  isArray: isArray,
+  forEach: forEach,
+  merge: merge
+};
+var utils_3 = utils.merge;
+
 function getTokenFromLocalStorage() {
   var tokens = {};
   var authn = localStorage.getItem('x-authn');
@@ -110,18 +187,68 @@ $http._get = $http.get;
 
 $http.get = function (endpoint) {
   var query = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-  return $http._get(endpoint, {
+  var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+  return $http._get(endpoint, utils_3(options, {
     params: query
-  });
+  }));
+};
+
+$http._post = $http.post;
+
+$http.post = function () {
+  for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+    args[_key] = arguments[_key];
+  }
+
+  var endpoint = args[0],
+      options = args[3];
+  var query = args[1],
+      data = args[2];
+
+  if (!options) {
+    if (!data) {
+      data = query;
+      query = {};
+    }
+  }
+
+  return $http._post(endpoint, data, utils_3(options, {
+    params: query
+  }));
+};
+
+$http._put = $http.put;
+
+$http.put = function () {
+  for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+    args[_key2] = arguments[_key2];
+  }
+
+  var endpoint = args[0],
+      options = args[3];
+  var query = args[1],
+      data = args[2];
+
+  if (!options) {
+    if (!data) {
+      data = query;
+      query = {};
+    }
+  }
+
+  return $http._put(endpoint, data, utils_3(options, {
+    params: query
+  }));
 };
 
 $http._delete = $http["delete"];
 
 $http["delete"] = function (endpoint) {
   var query = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-  return $http._delete(endpoint, {
+  var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+  return $http._delete(endpoint, utils_3(options, {
     params: query
-  });
+  }));
 };
 
 (function webTokenByLocalStorage() {
