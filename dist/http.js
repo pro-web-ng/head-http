@@ -1,8 +1,10 @@
 'use strict';
 
-function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
+var axios = require('axios');
 
-var axios = _interopDefault(require('axios'));
+function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+var axios__default = /*#__PURE__*/_interopDefaultLegacy(axios);
 
 function _typeof(obj) {
   "@babel/helpers - typeof";
@@ -172,7 +174,7 @@ function onError(error) {
   }
 }
 
-var $http = axios.create({});
+var $http = axios__default['default'].create({});
 $http.interceptors.request.use(function (config) {
   var tokens = token.gets();
   Object.keys(tokens).forEach(function (key) {

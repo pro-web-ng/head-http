@@ -1,7 +1,7 @@
 import { eslint } from 'rollup-plugin-eslint';
 import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
-import babel from 'rollup-plugin-babel';
+import babel from '@rollup/plugin-babel';
 
 
 export default [{
@@ -26,11 +26,12 @@ export default [{
     }),
 
     babel({
-      exclude: 'node_modules/**'
+      exclude: 'node_modules/**',
+      babelHelpers: 'bundled',
     }),
   ],
 
   output: [
-    { file: 'dist/http.js', format: 'cjs' },
+    { file: 'dist/http.js', format: 'cjs', exports: 'default' },
   ],
 }];
