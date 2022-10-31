@@ -1,3 +1,4 @@
+import rnd from 'vanilla.js/random/hex';
 import $http from './http';
 
 
@@ -23,6 +24,24 @@ import $http from './http';
         }); // eslint-disable-line function-paren-newline
     }());
   }
+}());
+
+
+(function jaegerTracing() {
+  $http.interceptors.request.use(
+    function (config) {
+      const traceId = rnd(16);
+      const spanId = rnd(16);
+      const parentSpanId = traceId;
+      const flag = '01'; // TODO: sampling
+
+      if (flag) {
+        const header = 'uber-trace-id';
+        config.headers[header] = `${traceId}:${spanId}:${parentSpanId}:${flag}`; // eslint-disable-line no-param-reassign
+      }
+
+      return config;
+    }); // eslint-disable-line function-paren-newline
 }());
 
 

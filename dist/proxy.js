@@ -110,6 +110,16 @@ var utils = {
   merge: merge
 };
 
+var hex = function rnd(repeat) {
+  var text = '';
+  var possible = '0123456789abcdef';
+  var len = possible.length;
+  for (var i = 0; i < repeat; i += 1) {
+    text += possible.charAt(Math.floor(Math.random() * len));
+  }
+  return text;
+};
+
 function getTokenFromLocalStorage() {
   const tokens = {};
   const authn = localStorage.getItem('x-authn');
@@ -276,6 +286,22 @@ $http.delete = function (endpoint) {
       }); // eslint-disable-line function-paren-newline
     })();
   }
+})();
+
+(function jaegerTracing() {
+  $http.interceptors.request.use(function (config) {
+    const traceId = hex(16);
+    const spanId = hex(16);
+    const parentSpanId = traceId;
+    const flag = '01'; // TODO: sampling
+
+    {
+      const header = 'uber-trace-id';
+      config.headers[header] = "".concat(traceId, ":").concat(spanId, ":").concat(parentSpanId, ":").concat(flag); // eslint-disable-line no-param-reassign
+    }
+
+    return config;
+  }); // eslint-disable-line function-paren-newline
 })();
 
 $http.defaults.proxy = {
