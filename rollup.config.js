@@ -1,7 +1,8 @@
-import { eslint } from 'rollup-plugin-eslint';
+import eslint from '@rollup/plugin-eslint';
 import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
 import babel from '@rollup/plugin-babel';
+import json from '@rollup/plugin-json';
 
 
 export default [
@@ -10,13 +11,13 @@ export default [
 
     external: [
       'axios',
-      // 'vanilla.js/forge/des',
-      // 'vanilla.js/forge/rsa',
-      // 'vanilla.js/forge/sha256',
+      'vanilla.js',
     ],
 
     plugins: [
       eslint(),
+
+      json(),
 
       commonjs({
         sourceMap: false,
@@ -41,13 +42,13 @@ export default [
 
     external: [
       'axios',
-      // 'vanilla.js/forge/des',
-      // 'vanilla.js/forge/rsa',
-      // 'vanilla.js/forge/sha256',
+      'vanilla.js',
     ],
 
     plugins: [
       eslint(),
+
+      json(),
 
       commonjs({
         sourceMap: false,
@@ -66,4 +67,5 @@ export default [
     output: [
       { file: 'dist/proxy.js', format: 'cjs', exports: 'default' },
     ],
-  }];
+  },
+];

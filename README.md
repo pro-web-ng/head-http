@@ -17,6 +17,11 @@ $http.post(endpoint, null, data, options);
 CHANGELOG
 ==
 
+0.5.0
+--
+
+1. 默认使用 `jaeger` 格式 `uber-trace-id`，暂时不提供开关
+
 0.4.0
 --
 
