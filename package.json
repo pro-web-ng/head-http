@@ -1,6 +1,6 @@
 {
   "name": "@head/http",
-  "version": "0.5.1",
+  "version": "0.6.1",
   "description": "$http",
   "main": "dist/http.js",
   "scripts": {
@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/head-js/http",
   "peerDependencies": {
-    "axios": "*",
+    "axios": "^1.0.0",
     "vanilla.js": "*"
   },
   "devDependencies": {
@@ -31,12 +31,11 @@
     "@rollup/plugin-babel": "5.3.1",
     "@rollup/plugin-commonjs": "21.0.3",
     "@rollup/plugin-eslint": "8.0.1",
-    "@rollup/plugin-json": "4.1.0",
     "@rollup/plugin-node-resolve": "13.1.3",
-    "axios": "0.21.4",
+    "axios": "1.3.6",
     "eslint": "7.32.0",
     "eslint-config-airbnb": "18.2.0",
     "rollup": "2.60.2",
-    "vanilla.js": "0.2.8"
+    "vanilla.js": "0.2.9"
   }
 }

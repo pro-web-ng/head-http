@@ -6,16 +6,6 @@ function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'defau
 
 var axios__default = /*#__PURE__*/_interopDefaultLegacy(axios);
 
-var hex = function rnd(repeat) {
-  var text = '';
-  var possible = '0123456789abcdef';
-  var len = possible.length;
-  for (var i = 0; i < repeat; i += 1) {
-    text += possible.charAt(Math.floor(Math.random() * len));
-  }
-  return text;
-};
-
 /* eslint-disable */
 /* axios@1.3.6 */
 
@@ -209,50 +199,4 @@ function $create(opts) {
   return $http;
 }
 
-const $http = $create({});
-(function webTokenByLocalStorage() {
-  if (localStorage && localStorage.getItem && localStorage.setItem) {
-    (function () {
-      const initial = localStorage.getItem('x-authn');
-      if (initial) {
-        $http.defaults.headers.common['x-authn'] = initial;
-      }
-      $http.interceptors.request.use(function (config) {
-        const authn = localStorage.getItem('x-authn');
-        config.headers['x-authn'] = authn; // eslint-disable-line no-param-reassign
-        return config;
-      }, function (error) {
-        return Promise.reject(error);
-      }); // eslint-disable-line function-paren-newline
-
-      $http.interceptors.response.use(function (resp) {
-        if (resp.headers && resp.headers['x-set-authn']) {
-          const authn = resp.headers['x-set-authn'];
-          $http.defaults.headers.common['x-authn'] = authn;
-          localStorage.setItem('x-authn', authn);
-        }
-        return resp;
-      }, function (error) {
-        return Promise.reject(error);
-      }); // eslint-disable-line function-paren-newline
-    })();
-  }
-})();
-
-(function jaegerTracing() {
-  $http.interceptors.request.use(function (config) {
-    const traceId = hex(16);
-    const spanId = hex(16);
-    const parentSpanId = traceId;
-    const flag = '01'; // TODO: sampling
-
-    {
-      const header = 'uber-trace-id';
-      config.headers[header] = "".concat(traceId, ":").concat(spanId, ":").concat(parentSpanId, ":").concat(flag); // eslint-disable-line no-param-reassign
-    }
-
-    return config;
-  }); // eslint-disable-line function-paren-newline
-})();
-
-module.exports = $http;
+module.exports = $create;
