@@ -1,0 +1,29 @@
+{
+  "name": "@head/http",
+  "version": "0.7.0",
+  "description": "$http",
+  "main": "http.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/head-js/http.git"
+  },
+  "keywords": [
+    "$http",
+    "axios"
+  ],
+  "author": "hbrls <shuaizhexu@gmail.com> (https://lisite.de)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/head-js/http/issues"
+  },
+  "homepage": "https://github.com/head-js/http",
+  "peerDependencies": {
+    "axios": "^1.0.0",
+    "vanilla.js": "*"
+  },
+  "devDependencies": {
+    "axios": "1.3.6",
+    "vanilla.js": "0.2.11"
+  }
+}

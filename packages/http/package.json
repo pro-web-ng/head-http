@@ -1,25 +1,11 @@
 {
-  "name": "@head/http",
-  "version": "0.6.1",
+  "name": "@head/http-http",
+  "version": "0.7.0",
   "description": "$http",
   "main": "dist/http.js",
   "scripts": {
     "build": "rollup --config"
   },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/head-js/http.git"
-  },
-  "keywords": [
-    "$http",
-    "axios"
-  ],
-  "author": "hbrls <shuaizhexu@gmail.com> (https://lisite.de)",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/head-js/http/issues"
-  },
-  "homepage": "https://github.com/head-js/http",
   "peerDependencies": {
     "axios": "^1.0.0",
     "vanilla.js": "*"
@@ -29,13 +15,13 @@
     "@babel/eslint-parser": "7.12.17",
     "@babel/preset-env": "7.12.17",
     "@rollup/plugin-babel": "5.3.1",
-    "@rollup/plugin-commonjs": "21.0.3",
+    "@rollup/plugin-commonjs": "22.0.2",
     "@rollup/plugin-eslint": "8.0.1",
+    "@rollup/plugin-json": "4.1.0",
     "@rollup/plugin-node-resolve": "13.1.3",
     "axios": "1.3.6",
     "eslint": "7.32.0",
     "eslint-config-airbnb": "18.2.0",
-    "rollup": "2.60.2",
-    "vanilla.js": "0.2.9"
+    "rollup": "2.79.1"
   }
 }

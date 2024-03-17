@@ -9,8 +9,8 @@ export default [
     input: 'src/index.js',
 
     external: [
+      'core-js/modules/web.url.to-json.js',
       'axios',
-      'vanilla.js',
     ],
 
     plugins: [
@@ -31,36 +31,7 @@ export default [
     ],
 
     output: [
-      { file: 'dist/http.js', format: 'cjs', exports: 'default' },
-    ],
-  },
-  {
-    input: 'src/http.js',
-
-    external: [
-      'axios',
-      'vanilla.js',
-    ],
-
-    plugins: [
-      eslint(),
-
-      commonjs({
-        sourceMap: false,
-      }),
-
-      resolve({
-        browser: true,
-      }),
-
-      babel({
-        exclude: 'node_modules/**',
-        babelHelpers: 'bundled',
-      }),
-    ],
-
-    output: [
-      { file: 'dist/create.js', format: 'cjs', exports: 'default' },
+      { file: '../../dist/axios.js', format: 'cjs', exports: 'default' },
     ],
   },
 ];
